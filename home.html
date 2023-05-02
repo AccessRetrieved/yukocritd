@@ -14137,7 +14137,7 @@
     </style>
 </head> <!--init headings for css imports later-->
 
-<body onload="getDate()"> <!--set published date to today (can be changed later to meet Yuko's needs)-->
+<body onload="onload()"> <!--set published date to today (can be changed later to meet Yuko's needs)-->
     <div class="page-content">
         <h1>
             NRDC — Plastic Pollution <!--title-->
@@ -14266,37 +14266,54 @@
 
             <div class="contact"> <!--contact us form-->
                 <h2>Contact us</h2>
+
                 <form>
                     <div class="form-floating mb-3"> <!--name section-->
-                        <input type="text" class="form-control" id="floatingInput" placeholder="John Doe">
-                        <label for="floatingInput">Your Full Name</label>
+                        <input type="text" class="form-control" placeholder="John Doe" id="name" required>
+                        <label for="name">Your Full Name</label>
                     </div>
 
                     <div class="form-floating mb-3"> <!--subject section-->
-                        <input type="text" class="form-control" id="floatingInput"
-                            placeholder="Questions about Plastic Pollution and NRDC's Mission">
-                        <label for="floatingInput">Subject</label>
+                        <input type="text" class="form-control" id="subject"
+                            placeholder="Questions about Plastic Pollution and NRDC's Mission" required>
+                        <label for="subject">Subject</label>
                     </div>
 
                     <div class="mb-3 form-check"> <!--checkbox section-->
-                        <input type="checkbox" class="form-check-input" id="policycheck">
-                        <label class="form-check-label" for="policycheck">I agree to the policies</label>
+                        <input type="checkbox" class="form-check-input" id="consent">
+                        <label class="form-check-label" for="consent">I agree to the policies</label>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Send</button> <!--submit button-->
+                    <button type="button" class="btn btn-primary btn-m" onclick="submitContact()">Send</button>
                 </form>
             </div>
         </div>
-    </body> <!--javascript function below-->
-    <script>
-        function getDate() {
-            document.getElementById('date').innerHTML = 'Published ' + String((new Date()).getMonth() + 1).padStart(2, '0') + '/' + String((new Date()).getDate()).padStart(2, '0') + '/' + (new Date()).getFullYear();
-        }
+</body> <!--javascript function below-->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+<script>
+    function getDate() {
+        document.getElementById('date').innerHTML = 'Published ' + String((new Date()).getMonth() + 1).padStart(2, '0') + '/' + String((new Date()).getDate()).padStart(2, '0') + '/' + (new Date()).getFullYear();
+    }
 
-        function submitContact() {
-            var name = document.getElementById('name').value;
-            var subject = document.getElementById('subject').value;
-            var consent = document.getElementById('consent').checked;
+    function onload() {
+        var toast = document.getElementById('toasthint');
+        toast.style.display = 'none';
+
+        getDate();
+    }
+
+    function submitContact() {
+        var name = document.getElementById('name');
+        var subject = document.getElementById('subject');
+        var consent = document.getElementById('consent');
+
+        if (consent.checked) {
+            window.open("mailto:xiaojiaai2323@gmail.com?subject=" + subject.value + "&body=" + `${name.value} has a message for you.`);
+        } else {
+            alert('Please agree to the policies.')
         }
-    </script>
+    }
+</script>
+
 </html>
