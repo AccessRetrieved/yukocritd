@@ -14287,17 +14287,16 @@
                 </form>
             </div>
         </div>
-</body> <!--javascript function below-->
-<script>
-    function getDate() {
-        document.getElementById('date').innerHTML = 'Published ' + String((new Date()).getMonth() + 1).padStart(2, '0') + '/' + String((new Date()).getDate()).padStart(2, '0') + '/' + (new Date()).getFullYear();
-    }
+    </body> <!--javascript function below-->
+    <script>
+        function getDate() {
+            document.getElementById('date').innerHTML = 'Published ' + String((new Date()).getMonth() + 1).padStart(2, '0') + '/' + String((new Date()).getDate()).padStart(2, '0') + '/' + (new Date()).getFullYear();
+        }
 
-    function submitContact() {
-        var name = document.getElementById('name').value;
-        var subject = document.getElementById('subject').value;
-        var consent = document.getElementById('consent').checked;
-    }
-</script>
-
+        function submitContact() {
+            var name = document.getElementById('name').value;
+            var subject = document.getElementById('subject').value;
+            var consent = document.getElementById('consent').checked;
+        }
+    </script>
 </html>
