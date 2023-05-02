@@ -14137,7 +14137,7 @@
     </style>
 </head> <!--init headings for css imports later-->
 
-<body onload="onload()"> <!--set published date to today (can be changed later to meet Yuko's needs)-->
+<body onload="pageLoad()"> <!--set published date to today (can be changed later to meet Yuko's needs)-->
     <div class="page-content">
         <h1>
             NRDC — Plastic Pollution <!--title-->
@@ -14292,15 +14292,24 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
 <script>
+    var images = [];
+    function preloadImages() {
+        for (var i = 0; i < arguments.length; i++) {
+            images[i] = new Image();
+            images[i].src = preloadImages.arguments[i];
+        }
+    }
+
     function getDate() {
         document.getElementById('date').innerHTML = 'Published ' + String((new Date()).getMonth() + 1).padStart(2, '0') + '/' + String((new Date()).getDate()).padStart(2, '0') + '/' + (new Date()).getFullYear();
     }
 
-    function onload() {
-        var toast = document.getElementById('toasthint');
-        toast.style.display = 'none';
-
+    function pageLoad() {
         getDate();
+        preloadImages(
+            "https://worldbank.scene7.com/is/image/worldbankprod/Malaysia-Islands?wid=780&hei=439&qlt=85,0&resMode=sharp",
+            "https://logos-download.com/wp-content/uploads/2019/06/Natural_Resources_Defense_Council_Logo_full.png"
+        )
     }
 
     function submitContact() {
