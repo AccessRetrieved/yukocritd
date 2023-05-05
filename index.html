@@ -14138,23 +14138,16 @@
 </head> <!--init headings for css imports later-->
 
 <body onload="pageLoad()"> <!--set published date to today (can be changed later to meet Yuko's needs)-->
-    <div class="page-content">
+    <div class="page-content" id="page-content">
         <h1>
             NRDC — Plastic Pollution <!--title-->
         </h1>
 
         <span class="tag">Yuko Xiao</span><br> <!--author-->
         <span class="tag" id="date"></span><br> <!--published date-->
-        <span class="tag" id="read"> <!--read time-->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock"
-                viewBox="0 0 16 16">
-                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-            </svg> <!--clock svg-->
-            3 minutes read
-        </span><br>
+        <span class="tag" id="read"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" /><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" /></svg> minutes read</span><br>
         <a href="/signin.html" style="text-decoration: none;"><span class="tag" style="color: #007bff;">Sign in to
-                edit</span></a>
+                edit (Beta)</span></a>
 
         <hr class="solid"> <!--divider-->
 
@@ -14314,13 +14307,15 @@
         document.getElementById('date').innerHTML = 'Published ' + String((new Date()).getMonth() + 1).padStart(2, '0') + '/' + String((new Date()).getDate()).padStart(2, '0') + '/' + (new Date()).getFullYear();
     }
 
-    
+
     function pageLoad() {
         getDate();
         preloadImages([
             "https://worldbank.scene7.com/is/image/worldbankprod/Malaysia-Islands?wid=780&hei=439&qlt=85,0&resMode=sharp",
             "https://logos-download.com/wp-content/uploads/2019/06/Natural_Resources_Defense_Council_Logo_full.png"
         ])
+
+        readingTime();
     }
 
     function submitContact() {
@@ -14333,6 +14328,15 @@
         } else {
             alert('Please agree to the policies.')
         }
+    }
+
+    function readingTime() {
+        const text = document.getElementById('page-content').innerText;
+        const wpm = 200;
+        const words = text.trim().split(/\s+/).length;
+        const time = Math.ceil(words / wpm);
+        console.log(time)
+        document.getElementById('read').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" /><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" /></svg>${time} minute read · if ${wpm} wpm`
     }
 </script>
 
